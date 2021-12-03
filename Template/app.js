@@ -37,6 +37,7 @@
         productVersion: "",
     };
 
+    /*
     var script = document.createElement("script");
     script.src = loaderUrl;
     script.onload = () => {
@@ -47,6 +48,24 @@
         });
     };
     document.body.appendChild(script);
+    */
+
+    //RCK
+    var script = document.createElement("script");
+    script.src = loaderUrl;
+    script.onload = () => {
+        createUnityInstance(canvas, config, onProgress)
+            .then((unityInstance) => {
+                loader.remove();
+
+                window.unityInstance = unityInstance;   //the magic to send data to unity
+                
+            }).catch((message) => {
+                alert(message);
+            });
+    };
+    document.body.appendChild(script);
+    // End RCk
 
     window.addEventListener('resize', onWindowResize);
     onWindowResize();
